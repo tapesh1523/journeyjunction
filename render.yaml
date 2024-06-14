@@ -1,0 +1,18 @@
+services:
+  - type: web
+    name: journeyjunction
+    env: python
+    buildCommand: 
+      - pip install -r requirements.txt
+      - python manage.py collectstatic --no-input
+      - python manage.py migrate
+    startCommand: gunicorn journeyjunction.wsgi:application
+    envVars:
+      - key: DJANGO_SECRET_KEY
+        value: django-insecure-s_0ua)6n5&$=p_q!y&10^&w-5ntj3mg9eh$+z0fm+85(+%11%(
+      - key: DATABASE_URL
+        fromDatabase:
+          name: stagingdb_p8wb
+          property: connectionString
+    databases:
+      - name: stagingdb_p8wb
