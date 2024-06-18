@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     'rest_framework',
     'api',
+    'drf_yasg',
 ]
 
 MIDDLEWARE = [
@@ -82,15 +83,15 @@ WSGI_APPLICATION = "journeyjunction.wsgi.application"
 #         "NAME": BASE_DIR / "db.sqlite3",
 #     }
 # }
-DATABASES = {
-    'default': dj_database_url.config(conn_max_age=600)
-}
+# DATABASES = {
+#     'default': dj_database_url.config(conn_max_age=600)
+# }
 
 #postgresql databse deployed on render.com
 
-# DATABASES = {
-#     'default': dj_database_url.config(default='postgres://stagingdb_p8wb_user:yEgKhKOqOIMoQFCepV4Xp2UUodoVH1bq@dpg-cplt0pqju9rs73fjsg10-a.oregon-postgres.render.com/stagingdb_p8wb')
-# }
+DATABASES = {
+    'default': dj_database_url.config(default='postgres://stagingdb_p8wb_user:yEgKhKOqOIMoQFCepV4Xp2UUodoVH1bq@dpg-cplt0pqju9rs73fjsg10-a.oregon-postgres.render.com/stagingdb_p8wb')
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
@@ -130,3 +131,5 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
+
