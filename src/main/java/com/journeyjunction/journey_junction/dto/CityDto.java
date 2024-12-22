@@ -28,5 +28,5 @@ public class CityDto {
 
     private String duration;
 
-    private Point location;
+    private PointDto location;
 }

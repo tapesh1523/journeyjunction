@@ -44,10 +44,13 @@ public class CityController {
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 
-    @GetMapping("/nearby/{latitude}/{longitude}/{distanceInKm}")
-    public ResponseEntity<ApiResponse<List<CityDto>>> getNearestCities(@PathVariable double latitude, @PathVariable double longitude, @PathVariable double distanceInKm) {
-        Point point = cityService.createPoint(latitude, longitude);
-        List<CityDto> nearByCities = cityService.findNearestCities(point, distanceInKm);
-        return ResponseEntity.ok(new ApiResponse<>(nearByCities));
+    @GetMapping("/{cityId}/nearby")
+    public ResponseEntity<ApiResponse<List<CityDto>>> getNearbyCities(
+            @PathVariable Long cityId,
+            @RequestParam(defaultValue = "10") double radius // Default radius 500 km
+    ) {
+        List<CityDto> nearbyCities = cityService.getCitiesNearby(cityId, radius);
+        return ResponseEntity.ok(new ApiResponse<>(nearbyCities));
     }
+
 }

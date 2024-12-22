@@ -1,7 +1,9 @@
 package com.journeyjunction.journey_junction.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.journeyjunction.journey_junction.utils.PointDeserializer;
 import com.journeyjunction.journey_junction.utils.PointSerializer;
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -44,7 +46,7 @@ public class City {
     @Column(nullable = false)
     private String duration;
 
+    @JsonDeserialize(using = PointDeserializer.class)
     @Column(columnDefinition = "Geometry(Point, 4326)", nullable = false)
-    @JsonSerialize(using = PointSerializer.class)
     private Point location;
 }

@@ -14,7 +14,7 @@ public interface CityService {
     CityDto updateCity(CityDto cityDto, Long cityId);
     void deleteCity(Long cityId);
 
-    List<CityDto> findNearestCities(Point point, double distanceInKm);
+    List<CityDto> getCitiesNearby(Long cityId, double radius);
 
     Point createPoint(double latitude, double longitude);
 }

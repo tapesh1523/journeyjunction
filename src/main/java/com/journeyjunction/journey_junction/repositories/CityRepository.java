@@ -14,12 +14,7 @@ import java.util.Optional;
 @Repository
 public interface CityRepository extends JpaRepository<City, Long> {
     Optional<City> findByName(String name);
-//    hello
 
-    @Query(value = "SELECT  c.* " +
-                    "From city c " +
-                    "WHERE ST_DWithin(c.location, :point, :distanceInMeters) = true " +
-                    "Order BY c.name", nativeQuery = true)
-    List<CityDto> findByPointAndDistanceInKm(@Param("point") Point point, @Param("distanceInMeters") double distanceInMeters);
-
+    @Query("SELECT c FROM City c WHERE ST_DistanceSphere(c.location, :point) <= :distance")
+    List<City> findCitiesWithinDistance(@Param("point") Point point, @Param("distance") double distance);
 }

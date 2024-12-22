@@ -69,10 +69,20 @@ public class CityServiceImpl implements CityService {
     }
 
     @Override
-    public List<CityDto> findNearestCities(Point point, double distanceInKm) {
-        double distanceInMeters = distanceInKm * 1000;
-        return cityRepository.findByPointAndDistanceInKm(point, distanceInMeters);
+    public List<CityDto> getCitiesNearby(Long cityId, double radius) {
+        City city = cityRepository.findById(cityId).orElseThrow(() -> new ResourceNotFoundException("City not found with Id" + cityId));
+
+
+        Point cityLocation = city.getLocation();
+
+
+        List<City> nearbyCities = cityRepository.findCitiesWithinDistance(cityLocation, radius * 1000);
+
+        return nearbyCities.stream()
+                .map(CityMapper::toCityDto)
+                .collect(Collectors.toList());
     }
+
 
     @Override
     public Point createPoint(double latitude, double longitude) {
