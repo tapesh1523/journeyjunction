@@ -12,11 +12,17 @@ public class CountryMapper {
                 .build();
     }
 
-    public static Country toCountry(CountryDto countryDto) {
-        Country country = new Country();
-        country.setId(countryDto.getId());
-        country.setName(countryDto.getName());
-        country.setDescription(countryDto.getDescription());
+    public static Country toEntity(CountryDto countryDto, Country country) {
+        if(countryDto.getId() != null) {
+            country.setId(country.getId());
+        }
+        if(countryDto.getName() != null) {
+            country.setName(countryDto.getName());
+        }
+        if(countryDto.getDescription() != null) {
+            country.setDescription(countryDto.getDescription());
+        }
         return country;
     }
+
 }

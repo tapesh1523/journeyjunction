@@ -1,5 +1,8 @@
 package com.journeyjunction.journey_junction.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.journeyjunction.journey_junction.utils.PointSerializer;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -13,25 +16,35 @@ public class City {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(nullable = false)
     private String name;
+
+    @Column(nullable = false)
     private String description;
 
     @ManyToOne
-    @JoinColumn(name = "state_id")
+    @JoinColumn(name = "state_id", nullable = false)
     private State state;
 
-    private String crowded_month;
+    @Column(nullable = false)
+    private String crowdedMonth;
 
-    private String time_to_visit;
+    @Column(nullable = false)
+    private String timeToVisit;
 
+    @Column(nullable = false)
     private String airport;
 
-    private String rlwy_station;
+    @Column(nullable = false)
+    private String railwayStation;
 
-    private String bus_station;
+    @Column(nullable = false)
+    private String busStation;
 
+    @Column(nullable = false)
     private String duration;
 
-    @Column(columnDefinition = "Geometry(Point, 4326)")
+    @Column(columnDefinition = "Geometry(Point, 4326)", nullable = false)
+    @JsonSerialize(using = PointSerializer.class)
     private Point location;
 }

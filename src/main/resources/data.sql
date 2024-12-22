@@ -1,21 +1,47 @@
-INSERT INTO city (id, name, description, state_id, crowded_month, time_to_visit, airport, rlwy_station, bus_station, duration, location) VALUES
-                                                                                                                                             (1, 'Jaipur', 'The Pink City, known for its rich history and architecture', 1, 'October', 'All year round', 'Jaipur International Airport', 'Jaipur Railway Station', 'Sindhi Camp Bus Stand', '2-3 days', ST_GeomFromText('POINT(75.7873 26.9124)', 4326)),
-                                                                                                                                             (2, 'Udaipur', 'City of Lakes, famous for its serene beauty and palaces', 1, 'January', 'October to March', 'Maharana Pratap Airport', 'Udaipur Railway Station', 'Udaipur Bus Stand', '2 days', ST_GeomFromText('POINT(73.6820 24.5854)', 4326)),
-                                                                                                                                             (3, 'Jodhpur', 'The Blue City, known for its historical fort and palaces', 1, 'February', 'October to March', 'Jodhpur Airport', 'Jodhpur Railway Station', 'Jodhpur Bus Stand', '2-3 days', ST_GeomFromText('POINT(73.0243 26.2389)', 4326)),
-                                                                                                                                             (4, 'Jaisalmer', 'Golden City, famous for its desert and historical monuments', 1, 'November', 'October to March', 'Jaisalmer Airport', 'Jaisalmer Railway Station', 'Jaisalmer Bus Stand', '2 days', ST_GeomFromText('POINT(70.9083 26.9124)', 4326)),
-                                                                                                                                             (5, 'Ajmer', 'Famous for the Ajmer Sharif Dargah and spiritual significance', 1, 'April', 'All year round', 'Ajmer Airport', 'Ajmer Railway Station', 'Ajmer Bus Stand', '1-2 days', ST_GeomFromText('POINT(74.6369 26.4713)', 4326)),
-                                                                                                                                             (6, 'Pushkar', 'Famous for the Pushkar Lake and the Brahma Temple', 1, 'November', 'September to March', 'Ajmer Railway Station (Nearby)', 'Pushkar Bus Station', 'Pushkar Bus Stand', '1-2 days', ST_GeomFromText('POINT(74.5523 26.4887)', 4326)),
-                                                                                                                                             (7, 'Bikaner', 'Known for its historic forts and camel rides', 1, 'August', 'October to March', 'Bikaner Airport', 'Bikaner Railway Station', 'Bikaner Bus Stand', '2 days', ST_GeomFromText('POINT(73.3022 28.0229)', 4326)),
-                                                                                                                                             (8, 'Kota', 'Known for its educational institutions and Chambal River', 1, 'July', 'October to March', 'Kota Airport', 'Kota Railway Station', 'Kota Bus Stand', '1-2 days', ST_GeomFromText('POINT(75.8248 25.2138)', 4326)),
-                                                                                                                                             (9, 'Alwar', 'Known for its historical forts, lakes, and the Sariska Tiger Reserve', 1, 'December', 'September to March', 'Alwar Railway Station', 'Alwar Bus Stand', '1 day', ST_GeomFromText('POINT(76.6123 27.5567)', 4326)),
-                                                                                                                                             (10, 'Chittorgarh', 'Historic city known for its fort and palaces', 1, 'March', 'October to March', 'Chittorgarh Railway Station', 'Chittorgarh Bus Stand', '1-2 days', ST_GeomFromText('POINT(74.6249 24.8795)', 4326)),
-                                                                                                                                             (11, 'Sikar', 'Known for its cultural heritage and historical sites', 1, 'April', 'October to March', 'Sikar Railway Station', 'Sikar Bus Stand', '1-2 days', ST_GeomFromText('POINT(75.1397 27.6163)', 4326)),
-                                                                                                                                             (12, 'Tonk', 'A small town known for its rich history and architecture', 1, 'May', 'October to March', 'Tonk Railway Station', 'Tonk Bus Stand', '1 day', ST_GeomFromText('POINT(75.7846 26.1785)', 4326)),
-                                                                                                                                             (13, 'Barmer', 'Known for its desert landscapes and traditional handicrafts', 1, 'October', 'October to March', 'Barmer Railway Station', 'Barmer Bus Stand', '2 days', ST_GeomFromText('POINT(71.4475 25.7426)', 4326)),
-                                                                                                                                             (14, 'Sawai Madhopur', 'Famous for the Ranthambore National Park and Tiger Reserve', 1, 'July', 'October to March', 'Sawai Madhopur Railway Station', 'Sawai Madhopur Bus Stand', '2 days', ST_GeomFromText('POINT(76.3416 25.0187)', 4326)),
-                                                                                                                                             (15, 'Nagaur', 'Known for its historical forts, temples, and vibrant cattle fairs', 1, 'January', 'October to March', 'Nagaur Railway Station', 'Nagaur Bus Stand', '1 day', ST_GeomFromText('POINT(73.7337 27.2164)', 4326)),
-                                                                                                                                             (16, 'Jalore', 'Known for its Jain temples and historical significance', 1, 'August', 'October to March', 'Jalore Railway Station', 'Jalore Bus Stand', '1-2 days', ST_GeomFromText('POINT(72.6272 25.2900)', 4326)),
-                                                                                                                                             (17, 'Pali', 'Known for its religious and cultural significance', 1, 'February', 'October to March', 'Pali Railway Station', 'Pali Bus Stand', '1 day', ST_GeomFromText('POINT(73.3433 25.7748)', 4326)),
-                                                                                                                                             (18, 'Bhilwara', 'Famous for its textile industry and historic sites', 1, 'March', 'October to March', 'Bhilwara Railway Station', 'Bhilwara Bus Stand', '1-2 days', ST_GeomFromText('POINT(74.6294 25.3364)', 4326)),
-                                                                                                                                             (19, 'Jhalawar', 'Known for its historical palaces, forts, and temples', 1, 'September', 'October to March', 'Jhalawar Railway Station', 'Jhalawar Bus Stand', '1-2 days', ST_GeomFromText('POINT(76.1630 24.5857)', 4326)),
-                                                                                                                                             (20, 'Hanumangarh', 'Known for its historical temples and rich culture', 1, 'November', 'October to March', 'Hanumangarh Railway Station', 'Hanumangarh Bus Stand', '1 day', ST_GeomFromText('POINT(75.3224 29.5780)', 4326));
+-- -- Step 1: Insert the Country "India"
+INSERT INTO country (id, name, description)
+VALUES (1, 'India', 'Country located in South Asia, known for its diversity and rich culture.');
+
+-- -- Step 2: Insert 20 States for India
+INSERT INTO state (id, name, description, country_id)
+VALUES
+    (1, 'Andhra Pradesh', 'State in the southeastern coastal region of India', 1),
+    (2, 'Arunachal Pradesh', 'State in the northeastern part of India', 1),
+    (3, 'Assam', 'State in northeastern India, known for tea and wildlife', 1),
+    (4, 'Bihar', 'State in eastern India known for its history and culture', 1),
+    (5, 'Chhattisgarh', 'State in central India, known for its forests and tribes', 1),
+    (6, 'Goa', 'State in western India, known for beaches and tourism', 1),
+    (7, 'Gujarat', 'State in western India, famous for its culture and cuisine', 1),
+    (8, 'Haryana', 'State in northern India, known for agriculture and industry', 1),
+    (9, 'Himachal Pradesh', 'State in northern India, famous for its hill stations', 1),
+    (10, 'Jharkhand', 'State in eastern India known for its rich mineral resources', 1),
+    (11, 'Karnataka', 'State in southern India, famous for its IT hub', 1),
+    (12, 'Kerala', 'State in southern India, known for its beaches and backwaters', 1),
+    (13, 'Madhya Pradesh', 'State in central India, known for history and heritage', 1),
+    (14, 'Maharashtra', 'State in western India, known for Mumbai and its culture', 1),
+    (15, 'Manipur', 'State in northeastern India, known for its natural beauty', 1),
+    (16, 'Meghalaya', 'State in northeastern India, famous for its hills and rainfall', 1),
+    (17, 'Mizoram', 'State in northeastern India, known for its natural beauty and culture', 1),
+    (18, 'Nagaland', 'State in northeastern India, known for its tribes and culture', 1),
+    (19, 'Odisha', 'State in eastern India, famous for its temples and beaches', 1),
+    (20, 'Punjab', 'State in northern India, known for its agricultural significance', 1);
+
+-- -- Step 3: Insert 10 Cities for each of the 20 States (for demo purposes, using the same set of city names and random data for cities)
+--
+
+-- -- -- Step 1: Insert Cities for Andhra Pradesh
+-- --
+INSERT INTO city (id, name, description, state_id, crowded_month, time_to_visit, airport, railway_station, bus_station, duration, location)
+VALUES
+    (1, 'Visakhapatnam', 'Port city and industrial hub', 1, 'December', 'October-March', 'Visakhapatnam Airport', 'Visakhapatnam Railway Station', 'Visakhapatnam Bus Station', '3 hours', ST_GeomFromText('POINT(83.2185 17.6869)', 4326)),
+    (2, 'Vijayawada', 'Business and cultural center', 1, 'November', 'November-February', 'Vijayawada Airport', 'Vijayawada Railway Station', 'Vijayawada Bus Station', '2 hours', ST_GeomFromText('POINT(80.7872 16.5063)', 4326)),
+    (3, 'Tirupati', 'Temple town famous for the Tirumala Temple', 1, 'August', 'November-January', 'Tirupati Airport', 'Tirupati Railway Station', 'Tirupati Bus Station', '1.5 hours', ST_GeomFromText('POINT(79.4192 13.6288)', 4326)),
+    (4, 'Guntur', 'Known for agriculture and education', 1, 'January', 'October-March', 'Guntur Airport', 'Guntur Railway Station', 'Guntur Bus Station', '1 hour', ST_GeomFromText('POINT(80.4366 16.3064)', 4326)),
+    (5, 'Kakinada', 'Port city in Andhra Pradesh', 1, 'September', 'October-February', 'Kakinada Airport', 'Kakinada Railway Station', 'Kakinada Bus Station', '1.5 hours', ST_GeomFromText('POINT(82.2401 16.9918)', 4326)),
+    (6, 'Nellore', 'Known for its temples and beaches', 1, 'May', 'October-February', 'Nellore Airport', 'Nellore Railway Station', 'Nellore Bus Station', '1 hour', ST_GeomFromText('POINT(79.9867 14.4427)', 4326)),
+    (7, 'Rajahmundry', 'City on the banks of the Godavari River', 1, 'March', 'November-March', 'Rajahmundry Airport', 'Rajahmundry Railway Station', 'Rajahmundry Bus Station', '2 hours', ST_GeomFromText('POINT(81.7835 17.0041)', 4326)),
+    (8, 'Chittoor', 'Famous for its temples and red sanders', 1, 'June', 'October-February', 'Chittoor Airport', 'Chittoor Railway Station', 'Chittoor Bus Station', '1.5 hours', ST_GeomFromText('POINT(79.1004 13.2003)', 4326)),
+    (9, 'Anantapur', 'Known for agriculture and history', 1, 'April', 'October-February', 'Anantapur Airport', 'Anantapur Railway Station', 'Anantapur Bus Station', '1 hour', ST_GeomFromText('POINT(77.5996 14.6816)', 4326)),
+    (10, 'Khammam', 'Known for its temples and industries', 1, 'July', 'November-February', 'Khammam Airport', 'Khammam Railway Station', 'Khammam Bus Station', '1.5 hours', ST_GeomFromText('POINT(80.1508 17.2474)', 4326));
+
+-- Repeat for other states and cities...

@@ -2,10 +2,14 @@ package com.journeyjunction.journey_junction.services.impl;
 
 import com.journeyjunction.journey_junction.dto.CityDto;
 import com.journeyjunction.journey_junction.entities.City;
+import com.journeyjunction.journey_junction.entities.State;
 import com.journeyjunction.journey_junction.exceptions.ResourceNotFoundException;
+import com.journeyjunction.journey_junction.mapper.CityMapper;
 import com.journeyjunction.journey_junction.repositories.CityRepository;
+import com.journeyjunction.journey_junction.repositories.StateRepository;
 import com.journeyjunction.journey_junction.services.CityService;
 import lombok.RequiredArgsConstructor;
+import org.locationtech.jts.geom.Point;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
@@ -17,23 +21,18 @@ import java.util.stream.Collectors;
 public class CityServiceImpl implements CityService {
 
     private final CityRepository cityRepository;
-    private final ModelMapper modelMapper;
-
+    private final StateRepository stateRepository;
     @Override
     public CityDto getCity(Long cityId) {
-        return modelMapper.map(cityRepository.findById(cityId), CityDto.class);
+        return CityMapper.toCityDto(cityRepository.findById(cityId).orElseThrow(ResourceNotFoundException::new));
     }
 
-    @Override
-    public CityDto getCityByName(String cityName) {
-        return modelMapper.map(cityRepository.findByName(cityName), CityDto.class);
-    }
 
     @Override
     public List<CityDto> getCityList() {
         List<City> cities = cityRepository.findAll();
         return cities.stream()
-                .map(city -> modelMapper.map(city, CityDto.class))
+                .map(CityMapper::toCityDto)
                 .collect(Collectors.toList());
     }
 
@@ -41,22 +40,46 @@ public class CityServiceImpl implements CityService {
 
     @Override
     public CityDto createCity(CityDto cityDto) {
-        City city = modelMapper.map(cityDto, City.class);
-        return modelMapper.map(cityRepository.save(city), CityDto.class);
+        State state = stateRepository.findById(cityDto.getStateId()).orElseThrow(ResourceNotFoundException::new);
+        City city = CityMapper.toEntity(cityDto, new City(), state);
+        City savedCity = cityRepository.save(city);
+        return CityMapper.toCityDto(savedCity);
     }
 
     @Override
     public CityDto updateCity(CityDto cityDto, Long cityId) {
         City city = cityRepository.findById(cityId).orElseThrow(()->new ResourceNotFoundException("City not found with Id"+cityId));
-        cityDto.setId(city.getId());
-        modelMapper.map(cityDto, city);
-        City updatedCity = cityRepository.save(city);
-        return modelMapper.map(updatedCity, CityDto.class);
+        State state = stateRepository.findById(cityDto.getStateId()).orElseThrow(ResourceNotFoundException::new);
+        City updatedCity = CityMapper.toEntity(cityDto, city, state);
+
+        City savedCity = cityRepository.save(city);
+
+        return CityMapper.toCityDto(savedCity);
     }
 
     @Override
     public void deleteCity(Long cityId) {
-        cityRepository.deleteById(cityId);
+        if (cityRepository.findById(cityId).isPresent()) {
+            cityRepository.deleteById(cityId);
+        }
+        else{
+            throw new ResourceNotFoundException("City not found with Id"+cityId);
+        }
         return ;
+    }
+
+    @Override
+    public List<CityDto> findNearestCities(Point point, double distanceInKm) {
+        double distanceInMeters = distanceInKm * 1000;
+        return cityRepository.findByPointAndDistanceInKm(point, distanceInMeters);
+    }
+
+    @Override
+    public Point createPoint(double latitude, double longitude) {
+
+        Point point = new org.locationtech.jts.geom.GeometryFactory().createPoint(new org.locationtech.jts.geom.Coordinate(longitude, latitude));
+        point.setSRID(4326);
+
+        return point;
     }
 }

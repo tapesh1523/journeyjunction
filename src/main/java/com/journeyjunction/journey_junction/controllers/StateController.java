@@ -1,5 +1,6 @@
 package com.journeyjunction.journey_junction.controllers;
 
+import com.journeyjunction.journey_junction.advices.ApiResponse;
 import com.journeyjunction.journey_junction.dto.StateDto;
 import com.journeyjunction.journey_junction.services.StateService;
 import lombok.AllArgsConstructor;
@@ -17,23 +18,23 @@ public class StateController {
     private final StateService stateService;
 
     @PostMapping
-    public ResponseEntity<StateDto> createState(@RequestBody StateDto stateDto) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(stateService.createState(stateDto));
+    public ResponseEntity<ApiResponse<StateDto>> createState(@RequestBody StateDto stateDto) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(new ApiResponse<>(stateService.createState(stateDto)));
     }
 
     @GetMapping
-    public ResponseEntity<List<StateDto>> getAllStates() {
-        return ResponseEntity.ok(stateService.getAllStates());
+    public ResponseEntity<ApiResponse<List<StateDto>>> getAllStates() {
+        return ResponseEntity.ok(new ApiResponse<>(stateService.getAllStates()));
     }
 
     @GetMapping("/{stateId}")
-    public ResponseEntity<StateDto> getState(@PathVariable Long stateId) {
-        return ResponseEntity.ok(stateService.getState(stateId));
+    public ResponseEntity<ApiResponse<StateDto>> getState(@PathVariable Long stateId) {
+        return ResponseEntity.ok(new ApiResponse<>(stateService.getState(stateId)));
     }
 
-    @PutMapping("/{stateId}")
-    public ResponseEntity<StateDto> updateState(@RequestBody StateDto stateDto, @PathVariable Long stateId) {
-        return ResponseEntity.status(HttpStatus.OK).body(stateService.updateState(stateDto, stateId));
+    @PatchMapping("/{stateId}")
+    public ResponseEntity<ApiResponse<StateDto>> updateState(@RequestBody StateDto stateDto, @PathVariable Long stateId) {
+        return ResponseEntity.status(HttpStatus.OK).body(new ApiResponse<>(stateService.updateState(stateDto, stateId)));
     }
 
     @DeleteMapping("/{stateId}")
