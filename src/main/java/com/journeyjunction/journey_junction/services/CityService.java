@@ -16,5 +16,4 @@ public interface CityService {
 
     List<CityDto> getCitiesNearby(Long cityId, double radius);
 
-    Point createPoint(double latitude, double longitude);
 }

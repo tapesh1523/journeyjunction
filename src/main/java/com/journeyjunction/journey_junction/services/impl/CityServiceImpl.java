@@ -84,12 +84,5 @@ public class CityServiceImpl implements CityService {
     }
 
 
-    @Override
-    public Point createPoint(double latitude, double longitude) {
 
-        Point point = new org.locationtech.jts.geom.GeometryFactory().createPoint(new org.locationtech.jts.geom.Coordinate(longitude, latitude));
-        point.setSRID(4326);
-
-        return point;
-    }
 }
