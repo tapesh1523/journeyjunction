@@ -6,4 +6,5 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @RequestMapping
 public interface AttractionTypeRepository extends JpaRepository<AttractionType, Long> {
+    AttractionType findByName(String name);
 }

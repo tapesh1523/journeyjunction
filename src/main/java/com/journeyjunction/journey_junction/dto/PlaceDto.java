@@ -17,10 +17,10 @@ public class PlaceDto {
     private String description;
     private Long cityId;
     private String duration;
-    private Set<AttractionType> attractionType;
+    private Set<String> attractionType;
     private Set<String> images;
     private Double visitFare;
-    private Set<SuitableFor> suitableFor;
+    private Set<String> suitableFor;
     private Set<String> timeRange;
     private Set<String> openingRange;
     private BookingProcess bookingProcess;

@@ -8,6 +8,7 @@ import com.journeyjunction.journey_junction.mapper.PlaceMapper;
 import com.journeyjunction.journey_junction.repositories.CityRepository;
 import com.journeyjunction.journey_junction.repositories.PlaceRepository;
 import com.journeyjunction.journey_junction.services.PlaceService;
+import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -19,6 +20,7 @@ import java.util.stream.Collectors;
 public class PlaceServiceImpl implements PlaceService {
     private final PlaceRepository placeRepository;
     private final CityRepository cityRepository;
+
 
     @Override
     public PlaceDto create(PlaceDto placeDto) {
@@ -39,10 +41,9 @@ public class PlaceServiceImpl implements PlaceService {
 
     @Override
     public void delete(Long id) {
-        if(placeRepository.existsById(id)) {
+        if (placeRepository.existsById(id)) {
             placeRepository.deleteById(id);
-        }
-        else{
+        } else {
             throw new ResourceNotFoundException();
         }
         return;

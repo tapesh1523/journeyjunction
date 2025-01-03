@@ -6,4 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface SuitableForRepository extends JpaRepository<SuitableFor, Long> {
+    SuitableFor findByName(String name);
 }

@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.Setter;
 import org.locationtech.jts.geom.Point;
 
+import javax.validation.constraints.Pattern;
 import java.awt.*;
 import java.sql.Time;
 import java.util.List;
@@ -17,22 +18,26 @@ import java.util.Set;
 public class Place {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(nullable = false)
     private Long id;
+    @Column(nullable = false)
     private String name;
+    @Column(nullable = false)
     private String address;
+    @Column(nullable = false)
     private String description;
 
     @ManyToOne
-    @JoinColumn(name = "city_id")
+    @JoinColumn(name = "city_id", nullable = false)
     private City city;
 
     private String duration;
 
     @ManyToMany
     @JoinTable(
-        name = "place_attraction",
-            joinColumns =@JoinColumn(name = "place_id"),
-            inverseJoinColumns = @JoinColumn(name = "attraction")
+            name = "place_attraction",
+            joinColumns = @JoinColumn(name = "place_id"),
+            inverseJoinColumns = @JoinColumn(name = "attraction_id")  // Corrected column name for attraction type ID
     )
     private Set<AttractionType> attractionType;
 
@@ -52,13 +57,15 @@ public class Place {
     private Set<SuitableFor> suitableFor;
 
     @ElementCollection
-    @CollectionTable(name = "place_time_range", joinColumns = @JoinColumn(name = "place_id"))
     @Column(name = "time_range")
+    @Pattern(regexp = "^([01]\\d|2[0-3]):([0-5]\\d)\\s*-\\s*([01]\\d|2[0-3]):([0-5]\\d)$",
+            message = "Invalid time range format, should be 'HH:mm - HH:mm'")
     private Set<String> timeRange;
 
     @ElementCollection
-    @CollectionTable(name = "place_opening_range", joinColumns = @JoinColumn(name = "place_id"))
     @Column(name = "opening_hrs")
+    @Pattern(regexp = "^([01]\\d|2[0-3]):([0-5]\\d)\\s*-\\s*([01]\\d|2[0-3]):([0-5]\\d)$",
+            message = "Invalid time range format, should be 'HH:mm - HH:mm'")
     private Set<String> openingRange;
 
     @Enumerated(EnumType.STRING)
@@ -75,7 +82,7 @@ public class Place {
     @Column(name = "events")
     private Set<String> events;
 
-    @Column(columnDefinition = "Geometry(Point, 4326)")
+    @Column(columnDefinition = "Geometry(Point, 4326)", nullable = false)
     private Point location;
 
 }

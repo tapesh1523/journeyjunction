@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface AttractionTypeService {
     AttractionTypeDto create(AttractionTypeDto attractionTypeDto);
-    AttractionTypeDto update(AttractionTypeDto attractionTypeDto);
+    AttractionTypeDto update(Long id, AttractionTypeDto attractionTypeDto);
     List<AttractionTypeDto> getAll();
     AttractionTypeDto get(long id);
     void delete(long id);

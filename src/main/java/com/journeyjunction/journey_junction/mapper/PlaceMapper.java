@@ -5,15 +5,29 @@ import com.journeyjunction.journey_junction.entities.City;
 import com.journeyjunction.journey_junction.entities.Place;
 import com.journeyjunction.journey_junction.entities.AttractionType;
 import com.journeyjunction.journey_junction.entities.SuitableFor;
+import com.journeyjunction.journey_junction.repositories.AttractionTypeRepository;
+import com.journeyjunction.journey_junction.repositories.SuitableForRepository;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Component;
 
 import static com.journeyjunction.journey_junction.mapper.PointMapper.toPoint;
 import static com.journeyjunction.journey_junction.mapper.PointMapper.toPointDto;
 
 import java.util.HashSet;
 import java.util.Set;
+import java.util.stream.Collectors;
 
+
+@Component
 public class PlaceMapper {
 
+    private static AttractionTypeRepository attractionTypeRepository;
+    private static SuitableForRepository suitableForRepository;
+
+    public PlaceMapper(AttractionTypeRepository attractionTypeRepository, SuitableForRepository suitableForRepository) {
+        PlaceMapper.attractionTypeRepository = attractionTypeRepository;
+        PlaceMapper.suitableForRepository = suitableForRepository;
+    }
     // Convert Place entity to PlaceDto
     public static PlaceDto toPlaceDto(Place place) {
         return PlaceDto.builder()
@@ -22,7 +36,7 @@ public class PlaceMapper {
                 .address(place.getAddress())
                 .alert(place.getAlert())
                 .description(place.getDescription())
-                .attractionType(place.getAttractionType())  // Set AttractionTypes directly from entity
+                .attractionType(convertAttractionTypeToString(place.getAttractionType()))  // Set AttractionTypes directly from entity
                 .bookingProcess(place.getBookingProcess())
                 .events(place.getEvents())
                 .bookingProcessDesc(place.getBookingProcessDesc())
@@ -31,7 +45,7 @@ public class PlaceMapper {
                 .rating(place.getRating())
                 .timeRange(place.getTimeRange())
                 .visitFare(place.getVisitFare())
-                .suitableFor(place.getSuitableFor())  // Set SuitableFor directly from entity
+                .suitableFor(convertSuitableForToString(place.getSuitableFor()))  // Set SuitableFor directly from entity
                 .openingRange(place.getOpeningRange())
                 .location(toPointDto(place.getLocation()))  // Convert Point to PointDto
                 .duration(place.getDuration())
@@ -56,7 +70,7 @@ public class PlaceMapper {
             place.setDescription(placeDto.getDescription());
         }
         if (placeDto.getAttractionType() != null) {
-            place.setAttractionType(placeDto.getAttractionType());  // Directly map the set of AttractionTypes
+            place.setAttractionType(convertAttractionTypeStringToSet(placeDto.getAttractionType()));  // Directly map the set of AttractionTypes
         }
         if (placeDto.getBookingProcess() != null) {
             place.setBookingProcess(placeDto.getBookingProcess());
@@ -80,7 +94,7 @@ public class PlaceMapper {
             place.setVisitFare(placeDto.getVisitFare());
         }
         if (placeDto.getSuitableFor() != null) {
-            place.setSuitableFor(placeDto.getSuitableFor());  // Directly map the set of SuitableFor
+            place.setSuitableFor(convertSuitableForStringToSet(placeDto.getSuitableFor()));  // Directly map the set of SuitableFor
         }
         if (placeDto.getOpeningRange() != null) {
             place.setOpeningRange(placeDto.getOpeningRange());
@@ -99,4 +113,37 @@ public class PlaceMapper {
 
         return place;
     }
+
+
+    public static Set<String> convertAttractionTypeToString(Set<AttractionType> attractionTypes){
+        if (attractionTypes == null) {
+            return new HashSet<>();
+        }
+        return attractionTypes.stream().map(AttractionType::getName).collect(Collectors.toSet());
+    }
+
+    public static Set<AttractionType> convertAttractionTypeStringToSet(Set<String> attractionTypes){
+        if (attractionTypes == null) {
+            return new HashSet<>();
+        }
+        return attractionTypes.stream()
+                .map(attractionTypeRepository::findByName)
+                .collect(Collectors.toSet());
+    }
+
+    public static Set<SuitableFor> convertSuitableForStringToSet(Set<String> suitableFors){
+        if (suitableFors == null) {
+            return new HashSet<>();
+        }
+        return suitableFors.stream()
+                .map(suitableForRepository::findByName)
+                .collect(Collectors.toSet());
+    }
+    public static Set<String> convertSuitableForToString(Set<SuitableFor> SuitableFors){
+        if (SuitableFors == null) {
+            return new HashSet<>();
+        }
+        return SuitableFors.stream().map(SuitableFor::getName).collect(Collectors.toSet());
+    }
+
 }

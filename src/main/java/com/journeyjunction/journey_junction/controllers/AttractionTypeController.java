@@ -37,8 +37,7 @@ public class AttractionTypeController {
 
     @PatchMapping("/{id}")
     public ResponseEntity<ApiResponse<AttractionTypeDto>> updateAttractionType(@PathVariable Long id, @RequestBody AttractionTypeDto attractionTypeDto) {
-        attractionTypeDto.setId(id); // Set the ID from path variable
-        AttractionTypeDto updatedAttractionType = attractionTypeService.update(attractionTypeDto);
+        AttractionTypeDto updatedAttractionType = attractionTypeService.update(id,attractionTypeDto);
         return ResponseEntity.ok(new ApiResponse<>(updatedAttractionType));
     }
 

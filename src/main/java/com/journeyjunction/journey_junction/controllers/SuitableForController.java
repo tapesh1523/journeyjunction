@@ -37,7 +37,7 @@ public class SuitableForController {
 
     @PatchMapping("/{id}")
     public ResponseEntity<ApiResponse<SuitableForDto>> updateSuitableFor(@PathVariable Long id, @RequestBody SuitableForDto suitableForDto) {
-        SuitableForDto updatedSuitableFor = suitableForService.update(suitableForDto);
+        SuitableForDto updatedSuitableFor = suitableForService.update(id, suitableForDto);
         return ResponseEntity.ok(new ApiResponse<>(updatedSuitableFor));
     }
 

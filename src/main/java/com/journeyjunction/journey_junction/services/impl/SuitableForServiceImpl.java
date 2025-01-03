@@ -27,15 +27,13 @@ public class SuitableForServiceImpl implements SuitableForService {
     }
 
     @Override
-    public SuitableForDto update(SuitableForDto suitableForDto) {
+    public SuitableForDto update(Long id, SuitableForDto suitableForDto) {
         // Check if entity exists before updating
-        SuitableFor existingSuitableFor = suitableForRepository.findById(suitableForDto.getId())
-                .orElseThrow(() -> new ResourceNotFoundException("SuitableFor not found for ID: " + suitableForDto.getId()));
+        SuitableFor suitableFor = suitableForRepository.findById(id).orElseThrow(ResourceNotFoundException::new);
 
-        // Convert DTO to entity and update
-        SuitableFor suitableFor = SuitableForMapper.toEntity(suitableForDto, existingSuitableFor);
-        suitableFor = suitableForRepository.save(suitableFor);
-        return SuitableForMapper.toDto(suitableFor);
+        SuitableFor updated = SuitableForMapper.toEntity(suitableForDto, suitableFor);
+        SuitableFor saved = suitableForRepository.save(updated);
+        return SuitableForMapper.toDto(saved);
     }
 
     @Override

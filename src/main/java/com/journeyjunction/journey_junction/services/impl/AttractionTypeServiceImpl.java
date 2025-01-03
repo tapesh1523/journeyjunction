@@ -23,8 +23,11 @@ public class AttractionTypeServiceImpl implements AttractionTypeService {
     }
 
     @Override
-    public AttractionTypeDto update(AttractionTypeDto attractionTypeDto) {
-        return AttractionTypeMapper.toDto(attractionTypeRepository.save(AttractionTypeMapper.toEntity(attractionTypeDto, new AttractionType())));
+    public AttractionTypeDto update(Long id,AttractionTypeDto attractionTypeDto) {
+        AttractionType  attractionType = attractionTypeRepository.findById(id).orElseThrow(ResourceNotFoundException::new);
+        AttractionType updatedAttractionType = AttractionTypeMapper.toEntity(attractionTypeDto, attractionType);
+        AttractionType savedAttractionType = attractionTypeRepository.save(updatedAttractionType);
+        return AttractionTypeMapper.toDto(savedAttractionType);
     }
 
     @Override

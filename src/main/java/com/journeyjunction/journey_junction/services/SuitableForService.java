@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface SuitableForService {
     SuitableForDto create(SuitableForDto suitableForDto);
-    SuitableForDto update(SuitableForDto suitableForDto);
+    SuitableForDto update(Long id, SuitableForDto suitableForDto);
     void delete(Long id);
     SuitableForDto getById(Long id);
     List<SuitableForDto> getAll();
